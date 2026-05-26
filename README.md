@@ -1,8 +1,6 @@
 # Smart IoT System Code Package
 
-Acest pachet conține codul complet pentru proiectul:
-
-**Smart Campus + Smart Home + Smart Parking**
+**Smart Campus**
 
 ## Structură
 
@@ -46,7 +44,7 @@ Arduino Uno citește datele de la:
 
 ESP32 face conexiunea WiFi și comunică cu Firebase.
 
-În fișierul `Smart_IoT_ESP32_Firebase.ino`, modifică:
+
 
 ```cpp
 #define WIFI_SSID "YOUR_WIFI_NAME"
@@ -58,7 +56,6 @@ ESP32 face conexiunea WiFi și comunică cu Firebase.
 
 ## 3. Dashboard Web
 
-În fișierul `script.js`, modifică datele Firebase:
 
 ```js
 const firebaseConfig = {
@@ -74,15 +71,11 @@ const firebaseConfig = {
 
 ## 4. Conectare Arduino Uno - ESP32
 
-Recomandat:
-
 ```text
 Arduino TX  -> ESP32 RX GPIO16
 Arduino RX  -> ESP32 TX GPIO17
 Arduino GND -> ESP32 GND
 ```
-
-Important: ESP32 funcționează la 3.3V logic, iar Arduino Uno la 5V. Pentru TX Arduino către RX ESP32, folosește un divizor de tensiune sau level shifter.
 
 ## 5. Librării necesare Arduino IDE
 
@@ -97,9 +90,3 @@ Pentru ESP32:
 
 - Firebase ESP Client by Mobizt
 - WiFi
-
-## 6. Observație importantă despre LCD
-
-Dacă folosești LCD 16x2 normal, ai nevoie de mai mulți pini. Cel mai simplu este să folosești un modul LCD I2C.
-
-Pentru o maquetă mai curată, recomand LCD 16x2 I2C.
