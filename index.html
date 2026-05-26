@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Smart IoT System Dashboard</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+
+<body>
+  <header class="header">
+    <h1>Smart IoT System</h1>
+    <p>Smart Campus · Smart Home · Smart Parking</p>
+  </header>
+
+  <main class="container">
+    <section class="cards">
+      <div class="card">
+        <h2>Température</h2>
+        <p id="temperature">-- °C</p>
+      </div>
+
+      <div class="card">
+        <h2>Humidité</h2>
+        <p id="humidity">-- %</p>
+      </div>
+
+      <div class="card">
+        <h2>Gaz / Fumée</h2>
+        <p id="gas">--</p>
+      </div>
+
+      <div class="card">
+        <h2>Mouvement</h2>
+        <p id="motion">--</p>
+      </div>
+
+      <div class="card">
+        <h2>Parking</h2>
+        <p id="parking">-- places</p>
+      </div>
+
+      <div class="card">
+        <h2>État Sécurité</h2>
+        <p id="safety">--</p>
+      </div>
+    </section>
+
+    <section class="controls">
+      <h2>Contrôle à distance</h2>
+
+      <button onclick="sendCommand('LIGHT_ON')">Allumer lumière</button>
+      <button class="danger" onclick="sendCommand('LIGHT_OFF')">Éteindre lumière</button>
+      <button onclick="sendCommand('OPEN_DOOR')">Ouvrir porte</button>
+      <button onclick="sendCommand('OPEN_BARRIER')">Ouvrir barrière</button>
+      <button class="warning" onclick="sendCommand('RESET_PARKING')">Réinitialiser parking</button>
+    </section>
+
+    <section class="chart-box">
+      <h2>Évolution de la température</h2>
+      <canvas id="temperatureChart"></canvas>
+    </section>
+
+    <section class="event-box">
+      <h2>Dernier événement</h2>
+      <p id="lastEvent">Aucun événement</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

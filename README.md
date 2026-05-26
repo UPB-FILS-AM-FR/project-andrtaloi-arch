@@ -1,62 +1,105 @@
-# Your Project Name
+# Smart IoT System Code Package
 
-| | |
-|-|-|
-|`Author` | Your full name
+Acest pachet conține codul complet pentru proiectul:
 
-## Description
+**Smart Campus + Smart Home + Smart Parking**
 
-## Motivation
+## Structură
 
-## Architecture
+```text
+Smart_IoT_Project_Code/
+│
+├── 01_Arduino_Uno/
+│   └── Smart_IoT_Arduino.ino
+│
+├── 02_ESP32_Firebase/
+│   └── Smart_IoT_ESP32_Firebase.ino
+│
+├── 03_Web_Dashboard/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+└── 04_Documentation/
+    └── README.md
+```
 
-### Block diagram
+## 1. Arduino Uno
 
-<!-- Make sure the path to the picture is correct -->
-![Block Diagram](schematics/block_diagram.png)
+Arduino Uno citește datele de la:
 
-### Schematic
+- DHT11
+- MQ-2
+- PIR
+- HC-SR04
+- RFID RC522
 
-![Schematic](schematics/kicad_schematic.png)
+Și controlează:
 
-### Components
+- servomotoare
+- buzzer
+- LED-uri
+- releu
+- LCD
 
+## 2. ESP32
 
-<!-- This is just an example, fill in with your actual components -->
+ESP32 face conexiunea WiFi și comunică cu Firebase.
 
-| Device | Usage | Price |
-|--------|--------|-------|
-| Activ Buzzer | Buzzer | [1.5 RON](https://www.optimusdigital.ro/ro/audio-buzzere/635-buzzer-activ-de-3-v.html?search_query=buzzer&results=61) |
-| Push Button | Button | [1 RON](https://www.optimusdigital.ro/ro/butoane-i-comutatoare/1119-buton-6x6x6.html?search_query=buton&results=222) |
-| Jumper Wires | Connecting components | [7 RON](https://www.optimusdigital.ro/ro/fire-fire-mufate/884-set-fire-tata-tata-40p-10-cm.html?search_query=set+fire&results=110) |
-| Breadboard | Project board | [10 RON](https://www.optimusdigital.ro/ro/prototipare-breadboard-uri/8-breadboard-830-points.html?search_query=breadboard&results=145) |
+În fișierul `Smart_IoT_ESP32_Firebase.ino`, modifică:
 
-### Libraries
+```cpp
+#define WIFI_SSID "YOUR_WIFI_NAME"
+#define WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
 
-<!-- This is just an example, fill in the table with your actual components -->
+#define API_KEY "YOUR_FIREBASE_API_KEY"
+#define DATABASE_URL "https://your-project-id-default-rtdb.firebaseio.com/"
+```
 
-| Library | Description | Usage |
-|---------|-------------|-------|
-| [lib-name1](link-to-lib) | official description of the lib | Used for accesing the peripherals of the microcontroller  |
-| [lib-name2](link-to-lib) | official description of the lib | Used for accesing the peripherals of the microcontroller  |
+## 3. Dashboard Web
 
-## Log
+În fișierul `script.js`, modifică datele Firebase:
 
-<!-- write every week your progress here -->
+```js
+const firebaseConfig = {
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+```
 
-### Week 6 - 12 May
+## 4. Conectare Arduino Uno - ESP32
 
-### Week 7 - 19 May
+Recomandat:
 
-### Week 20 - 26 May
+```text
+Arduino TX  -> ESP32 RX GPIO16
+Arduino RX  -> ESP32 TX GPIO17
+Arduino GND -> ESP32 GND
+```
 
+Important: ESP32 funcționează la 3.3V logic, iar Arduino Uno la 5V. Pentru TX Arduino către RX ESP32, folosește un divizor de tensiune sau level shifter.
 
-## Reference links
+## 5. Librării necesare Arduino IDE
 
-<!-- Fill in with appropriate links and link titles -->
+Pentru Arduino Uno:
 
-[Tutorial 1](https://www.youtube.com/watch?v=wdgULBpRoXk&t=1s&ab_channel=BenEater)
+- Servo
+- DHT sensor library
+- MFRC522
+- LiquidCrystal
 
-[Article 1](https://www.explainthatstuff.com/induction-motors.html)
+Pentru ESP32:
 
-[Link title](https://projecthub.arduino.cc/)
+- Firebase ESP Client by Mobizt
+- WiFi
+
+## 6. Observație importantă despre LCD
+
+Dacă folosești LCD 16x2 normal, ai nevoie de mai mulți pini. Cel mai simplu este să folosești un modul LCD I2C.
+
+Pentru o maquetă mai curată, recomand LCD 16x2 I2C.

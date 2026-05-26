@@ -1,0 +1,45 @@
+SMART IOT PROJECT - WIRING GUIDE
+
+CONTROL:
+Arduino Uno = sensors and actuators
+ESP32 = WiFi and Firebase
+
+SERIAL COMMUNICATION:
+Arduino TX -> ESP32 RX GPIO16
+Arduino RX -> ESP32 TX GPIO17
+Arduino GND -> ESP32 GND
+
+IMPORTANT:
+Use a voltage divider or logic level shifter between Arduino TX and ESP32 RX.
+
+MAIN COMPONENTS:
+- RFID RC522 for access
+- MQ-2 for gas/smoke
+- PIR for motion
+- DHT11 for temperature/humidity
+- HC-SR04 for parking
+- Servo motor for door
+- Servo motor for barrier
+- LCD 16x2 for parking places
+- Relay for light
+- Buzzer for alarm
+- LEDs for status
+
+FIREBASE PATHS:
+/system/temperature
+/system/humidity
+/system/gas
+/system/motion
+/system/parkingPlaces
+/system/distance
+/system/safetyStatus
+/system/lastEvent
+/commands/action
+
+COMMAND VALUES:
+LIGHT_ON
+LIGHT_OFF
+OPEN_DOOR
+OPEN_BARRIER
+RESET_PARKING
+NONE
